@@ -6,4 +6,4 @@ log:
   level: "debug"
   outputs:
     - "stdout"
-  # encodingFormat: "json"
+  encodingFormat: "json"
