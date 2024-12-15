@@ -19,9 +19,9 @@ type ServerConfig struct {
 
 type LogConfig struct {
 	Level           string   `mapstructure:"level"`
+	EncondingFormat string   `mapstructure:"encodingFormat"`
 	Outputs         []string `mapstructure:"outputs"`
 	ErrorOutputs    []string `mapstructure:"errorOutputs"`
-	EncondingFormat string   `mapstructure:"encodingFormat"`
 }
 
 type Config struct {
@@ -43,14 +43,14 @@ func readConfig() error {
 
 func setDefaults() {
 	// Set defaults for server config
-	viper.SetDefault("Server.Mode", "dev")
-	viper.SetDefault("Server.Port", "8080")
+	viper.SetDefault("server.mode", "dev")
+	viper.SetDefault("server.port", "8080")
 
 	// Set defaults for logs config
-	viper.SetDefault("Log.Level", "error")
-	viper.SetDefault("Log.EncondingFormat", "json")
-	viper.SetDefault("Log.Outputs", []string{"stdout"})
-	viper.SetDefault("Log.ErrorOutputs", []string{"stderr"})
+	viper.SetDefault("log.level", "error")
+	viper.SetDefault("Log.encodingFormat", "json")
+	viper.SetDefault("log.outputs", []string{"stdout"})
+	viper.SetDefault("log.errorOutputs", []string{"stderr"})
 }
 
 func init() {
