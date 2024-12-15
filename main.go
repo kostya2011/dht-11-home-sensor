@@ -16,8 +16,8 @@ func main() {
 	fmt.Println(config.Cfg.Log)
 	fmt.Println(config.Cfg.Server)
 
-	log.Info("asdasd")
-	log.Error("sad")
+	log.Info("asdasd", nil)
+	log.Error("sad", nil)
 
 	routines.PrintLog()
 }
