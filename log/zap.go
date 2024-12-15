@@ -1,23 +1,23 @@
 package log
 
 import (
-	"fmt"
-	"sync"
-
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
 	"github.com/kostya2011/dht-11-home-sensor/config"
+	"github.com/kostya2011/dht-11-home-sensor/interfaces"
 )
 
-var (
+type ZapLogger struct {
 	logger *zap.Logger
-	once   sync.Once
-)
+}
 
-func init() {
-	// var err error
-	var err error
+// var (
+// 	logger *zap.Logger
+// 	once   sync.Once
+// )
+
+func NewZapLogger() *ZapLogger {
 	level := zap.NewAtomicLevelAt(getLoggerLevel(config.Cfg.Log.Level))
 	encoder := zap.NewProductionEncoderConfig()
 
@@ -35,10 +35,15 @@ func init() {
 		zapConfig.Development = true
 	}
 
-	logger, err = zapConfig.Build()
+	logger, err := zapConfig.Build()
+
+	defer logger.Sync()
 
 	if err != nil {
 		panic(err)
+	}
+	return &ZapLogger{
+		logger: logger,
 	}
 }
 
@@ -55,38 +60,22 @@ func getLoggerLevel(lvl string) zapcore.Level {
 	return zap.ErrorLevel
 }
 
-func IntLogField(key string, value int) zapcore.Field {
-	return zap.Int(key, value)
+func (logger *ZapLogger) Debug(msg string, fields ...interfaces.LogFields) {
+	logger.logger.Debug(msg)
 }
 
-func StringLogField(key string, value string) zapcore.Field {
-	return zap.String(key, value)
+func (logger *ZapLogger) Info(msg string, fields ...interfaces.LogFields) {
+	logger.logger.Info(msg)
 }
 
-func Debug(msg string, fields ...zapcore.Field) {
-	logger.Debug(msg, fields...)
+func (logger *ZapLogger) Warn(msg string, fields ...interfaces.LogFields) {
+	logger.logger.Warn(msg)
 }
 
-func Info(msg string, fields ...zapcore.Field) {
-	logger.Info(msg, fields...)
+func (logger *ZapLogger) Error(msg string, fields ...interfaces.LogFields) {
+	logger.logger.Error(msg)
 }
 
-func Warn(msg string, fields ...zapcore.Field) {
-	logger.Warn(msg, fields...)
-}
-
-func Erorr(msg string, fields ...zapcore.Field) {
-	logger.Error(msg, fields...)
-}
-
-func Panic(msg string, fields ...zapcore.Field) {
-	logger.Panic(msg, fields...)
-}
-
-func Fatal(msg string, fields ...zapcore.Field) {
-	logger.Fatal(msg, fields...)
-}
-
-func GetRequestsLoggerFormat() {
-	fmt.Println("Hello")
+func (logger *ZapLogger) Fatal(msg string, fields ...interfaces.LogFields) {
+	logger.logger.Fatal(msg)
 }
