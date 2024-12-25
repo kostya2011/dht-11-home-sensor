@@ -57,8 +57,8 @@ func setDefaults() {
 }
 
 func (cfg *Config) Output() string {
-	t, _ := yaml.Marshal(cfg)
-	return string(t)
+	strConfig, _ := yaml.Marshal(cfg)
+	return string(strConfig)
 }
 
 func init() {
