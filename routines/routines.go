@@ -5,5 +5,5 @@ import (
 )
 
 func PrintLog() {
-	log.Info("sad", nil)
+	log.Info("sad")
 }

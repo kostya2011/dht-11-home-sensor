@@ -60,22 +60,30 @@ func getLoggerLevel(lvl string) zapcore.Level {
 	return zap.ErrorLevel
 }
 
-func (logger *ZapLogger) Debug(msg string, fields ...interfaces.LogFields) {
-	logger.logger.Debug(msg)
+func (zl *ZapLogger) Debug(msg string, fields ...interfaces.LogFields) {
+	zl.logger.Debug(msg)
 }
 
-func (logger *ZapLogger) Info(msg string, fields ...interfaces.LogFields) {
-	logger.logger.Info(msg)
+func (zl *ZapLogger) Info(msg string, fields ...interfaces.LogFields) {
+	zl.logger.Info(msg, zapFields(fields)...)
 }
 
-func (logger *ZapLogger) Warn(msg string, fields ...interfaces.LogFields) {
-	logger.logger.Warn(msg)
+func (zl *ZapLogger) Warn(msg string, fields ...interfaces.LogFields) {
+	zl.logger.Warn(msg, zapFields(fields)...)
 }
 
-func (logger *ZapLogger) Error(msg string, fields ...interfaces.LogFields) {
-	logger.logger.Error(msg)
+func (zl *ZapLogger) Error(msg string, fields ...interfaces.LogFields) {
+	zl.logger.Error(msg, zapFields(fields)...)
 }
 
-func (logger *ZapLogger) Fatal(msg string, fields ...interfaces.LogFields) {
-	logger.logger.Fatal(msg)
+func (zl *ZapLogger) Fatal(msg string, fields ...interfaces.LogFields) {
+	zl.logger.Fatal(msg, zapFields(fields)...)
+}
+
+func zapFields(fields []interfaces.LogFields) []zap.Field {
+	logFields := make([]zap.Field, 0, len(fields))
+	for _, v := range fields {
+		logFields = append(logFields, zap.Any(v.Key, v.Value))
+	}
+	return logFields
 }

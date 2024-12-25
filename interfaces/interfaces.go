@@ -1,6 +1,9 @@
 package interfaces
 
-type LogFields map[string]interface{}
+type LogFields struct {
+	Key   string
+	Value interface{}
+}
 
 type Logger interface {
 	Debug(msg string, fields ...LogFields)
