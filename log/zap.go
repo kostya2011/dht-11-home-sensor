@@ -18,18 +18,18 @@ type ZapLogger struct {
 // )
 
 func NewZapLogger() *ZapLogger {
-	level := zap.NewAtomicLevelAt(getLoggerLevel(config.Cfg.Log.Level))
+	level := zap.NewAtomicLevelAt(getLoggerLevel(config.Values.Log.Level))
 	encoder := zap.NewProductionEncoderConfig()
 
 	zapConfig := zap.NewProductionConfig()
 	zapConfig.EncoderConfig = encoder
 	zapConfig.Level = level
-	zapConfig.Encoding = config.Cfg.Log.EncondingFormat
-	zapConfig.InitialFields = map[string]interface{}{"serverMode": config.Cfg.Server.Mode}
-	zapConfig.OutputPaths = config.Cfg.Log.Outputs
-	zapConfig.ErrorOutputPaths = config.Cfg.Log.ErrorOutputs
+	zapConfig.Encoding = config.Values.Log.EncondingFormat
+	zapConfig.InitialFields = map[string]interface{}{"serverMode": config.Values.Server.Mode}
+	zapConfig.OutputPaths = config.Values.Log.Outputs
+	zapConfig.ErrorOutputPaths = config.Values.Log.ErrorOutputs
 
-	if config.Cfg.Server.Mode == "production" {
+	if config.Values.Server.Mode == "production" {
 		zapConfig.Development = false
 	} else {
 		zapConfig.Development = true

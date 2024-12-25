@@ -5,11 +5,12 @@ import (
 	"sync"
 
 	"github.com/spf13/viper"
+	"gopkg.in/yaml.v3"
 )
 
 var (
-	once sync.Once
-	Cfg  *Config
+	once   sync.Once
+	Values *Config
 )
 
 type ServerConfig struct {
@@ -53,6 +54,11 @@ func setDefaults() {
 	viper.SetDefault("log.errorOutputs", []string{"stderr"})
 }
 
+func (cfg *Config) Output() string {
+	t, _ := yaml.Marshal(cfg)
+	return string(t)
+}
+
 func init() {
 	once.Do(func() {
 		// Read config
@@ -61,10 +67,10 @@ func init() {
 		}
 
 		// Unmarshall config into Config structure
-		Cfg = &Config{}
+		Values = &Config{}
 		setDefaults()
 
-		if err := viper.Unmarshal(Cfg); err != nil {
+		if err := viper.Unmarshal(Values); err != nil {
 			panic(err)
 		}
 	})

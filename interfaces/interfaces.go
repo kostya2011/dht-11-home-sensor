@@ -12,3 +12,7 @@ type Logger interface {
 	Error(msg string, fields ...LogFields)
 	Fatal(msg string, fields ...LogFields)
 }
+
+type Outputter interface {
+	Output()
+}
