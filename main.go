@@ -5,6 +5,7 @@ import (
 
 	"github.com/kostya2011/dht-11-home-sensor/config"
 	"github.com/kostya2011/dht-11-home-sensor/log"
+	"github.com/kostya2011/dht-11-home-sensor/routes"
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 
 	log.Info("Initilize Gin")
 	server := newGin()
-	server.Run(fmt.Sprintf("0.0.0.0:%v", cfg.Server.Port))
+	routes.NewRoutes(server)
 
-	// routines.PrintLog()
+	server.Run(fmt.Sprintf("0.0.0.0:%v", cfg.Server.Port))
 }

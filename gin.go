@@ -21,5 +21,9 @@ func newGin() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
+		log.Debug("endpoint", log.SetField("method", httpMethod))
+	}
+
 	return gin.Default()
 }
