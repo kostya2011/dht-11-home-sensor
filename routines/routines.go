@@ -5,5 +5,5 @@ import (
 )
 
 func PrintLog() {
-	log.Info("sad")
+	log.Info("log from routines")
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/kostya2011/dht-11-home-sensor/log"
+	"github.com/kostya2011/dht-11-home-sensor/routines"
 )
 
 func main() {
@@ -16,5 +17,5 @@ func main() {
 	log.Info("2211")
 	// log.Error("sad")
 
-	// routines.PrintLog()
+	routines.PrintLog()
 }
