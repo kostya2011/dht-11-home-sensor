@@ -1,9 +1,10 @@
 ---
 server:
-  mode: "production"
+  mode: "release"
   port: "8080"
 log:
   level: "debug"
+  logger: "zap"
   outputs:
     - "stdout"
   encodingFormat: "json"

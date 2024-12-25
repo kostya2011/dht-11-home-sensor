@@ -1,24 +1,28 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/kostya2011/dht-11-home-sensor/config"
 	"github.com/kostya2011/dht-11-home-sensor/log"
-	"github.com/kostya2011/dht-11-home-sensor/routines"
 )
 
 func main() {
 	// Initialize logging
-	zapLogger := log.NewZapLogger()
-	log.Init(zapLogger)
+	cfg := config.Values
+	switch {
+	case cfg.Log.Logger == "zap":
+		zapLogger := log.NewZapLogger()
+		log.Init(zapLogger)
+	default:
+		fmt.Println("Falling back to default looger `zap`")
+		zapLogger := log.NewZapLogger()
+		log.Init(zapLogger)
+	}
 
-	log.Debug(config.Values.Output())
+	log.Info("Initilize Gin")
+	server := newGin()
+	server.Run(fmt.Sprintf("0.0.0.0:%v", cfg.Server.Port))
 
-	// fmt.Println(config.Cfg.Log)
-	// fmt.Println(config.Cfg.Server)
-
-	log.Info("asdasd", log.SetField("b", "ddd"))
-	log.Info("2211")
-	// log.Error("sad")
-
-	routines.PrintLog()
+	// routines.PrintLog()
 }
