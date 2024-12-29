@@ -19,6 +19,7 @@ type ServerConfig struct {
 }
 
 type LogConfig struct {
+	Logger          string   `mapstructure:"logger"`
 	Level           string   `mapstructure:"level"`
 	EncondingFormat string   `mapstructure:"encodingFormat"`
 	Outputs         []string `mapstructure:"outputs"`
@@ -49,14 +50,15 @@ func setDefaults() {
 
 	// Set defaults for logs config
 	viper.SetDefault("log.level", "error")
+	viper.SetDefault("log.logger", "zap")
 	viper.SetDefault("Log.encodingFormat", "json")
 	viper.SetDefault("log.outputs", []string{"stdout"})
 	viper.SetDefault("log.errorOutputs", []string{"stderr"})
 }
 
 func (cfg *Config) Output() string {
-	t, _ := yaml.Marshal(cfg)
-	return string(t)
+	strConfig, _ := yaml.Marshal(cfg)
+	return string(strConfig)
 }
 
 func init() {

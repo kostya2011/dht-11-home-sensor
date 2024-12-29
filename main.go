@@ -1,24 +1,29 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/kostya2011/home-data/config"
 	"github.com/kostya2011/home-data/log"
-	"github.com/kostya2011/home-data/routines"
+	"github.com/kostya2011/home-data/routes"
 )
 
 func main() {
 	// Initialize logging
-	zapLogger := log.NewZapLogger()
-	log.Init(zapLogger)
+	cfg := config.Values
+	switch {
+	case cfg.Log.Logger == "zap":
+		zapLogger := log.NewZapLogger()
+		log.Init(zapLogger)
+	default:
+		fmt.Println("Falling back to default looger `zap`")
+		zapLogger := log.NewZapLogger()
+		log.Init(zapLogger)
+	}
 
-	log.Debug(config.Values.Output())
+	log.Info("Initilize Gin")
+	server := newGin()
+	routes.NewRoutes(server)
 
-	// fmt.Println(config.Cfg.Log)
-	// fmt.Println(config.Cfg.Server)
-
-	log.Info("asdasd", log.SetField("b", "ddd"))
-	log.Info("2211")
-	// log.Error("sad")
-
-	routines.PrintLog()
+	server.Run(fmt.Sprintf("0.0.0.0:%v", cfg.Server.Port))
 }
