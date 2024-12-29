@@ -1,4 +1,4 @@
-module github.com/kostya2011/dht-11-home-sensor
+module github.com/kostya2011/home-data
 
 go 1.23.1
 

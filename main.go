@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/kostya2011/dht-11-home-sensor/config"
-	"github.com/kostya2011/dht-11-home-sensor/log"
-	"github.com/kostya2011/dht-11-home-sensor/routes"
+	"github.com/kostya2011/home-data/config"
+	"github.com/kostya2011/home-data/log"
+	"github.com/kostya2011/home-data/routes"
 )
 
 func main() {

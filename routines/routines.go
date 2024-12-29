@@ -1,7 +1,7 @@
 package routines
 
 import (
-	"github.com/kostya2011/dht-11-home-sensor/log"
+	"github.com/kostya2011/home-data/log"
 )
 
 func PrintLog() {

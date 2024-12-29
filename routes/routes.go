@@ -7,8 +7,10 @@ import (
 func NewRoutes(server *gin.Engine) {
 	api := server.Group("/api")
 
-	api.GET("/temperature", getTemperature)
-	api.GET("/humidity", getHumidity)
+	api.GET("/ticker", getTickerValue)
+	api.GET("/tickers", getTickerValue)
+	api.POST("/ticker/register", registerTicker)
+	api.DELETE("/ticker/unregister", registerTicker)
 
 	server.GET("/health", healthCheck)
 }

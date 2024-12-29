@@ -4,8 +4,8 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/kostya2011/dht-11-home-sensor/config"
-	"github.com/kostya2011/dht-11-home-sensor/interfaces"
+	"github.com/kostya2011/home-data/config"
+	"github.com/kostya2011/home-data/interfaces"
 )
 
 type ZapLogger struct {

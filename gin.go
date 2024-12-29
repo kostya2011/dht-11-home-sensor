@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kostya2011/dht-11-home-sensor/config"
-	"github.com/kostya2011/dht-11-home-sensor/log"
+	"github.com/kostya2011/home-data/config"
+	"github.com/kostya2011/home-data/log"
 )
 
 func newGin() *gin.Engine {
