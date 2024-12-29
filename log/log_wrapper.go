@@ -1,7 +1,7 @@
 package log
 
 import (
-	"github.com/kostya2011/dht-11-home-sensor/interfaces"
+	"github.com/kostya2011/home-data/interfaces"
 )
 
 var (

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/kostya2011/dht-11-home-sensor/config"
-	"github.com/kostya2011/dht-11-home-sensor/log"
-	"github.com/kostya2011/dht-11-home-sensor/routines"
+	"github.com/kostya2011/home-data/config"
+	"github.com/kostya2011/home-data/log"
+	"github.com/kostya2011/home-data/routines"
 )
 
 func main() {
